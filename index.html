@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="가상의 대학생 박수호의 삼일회계법인 지원용 회계 포트폴리오">
+  <meta name="theme-color" content="#173d32">
+  <title>박수호 | Accounting Portfolio</title>
+  <style>
+    :root {
+      --cream: #f5f1e7;
+      --paper: #fffdf7;
+      --green: #173d32;
+      --green-2: #285747;
+      --muted: #68756d;
+      --line: #dcded2;
+      --gold: #b18a4a;
+      --shadow: 0 16px 40px rgba(23, 61, 50, .08);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: auto; }
+    body {
+      margin: 0;
+      color: var(--green);
+      background: var(--cream);
+      font-family: "Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .site-header {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(245, 241, 231, .97);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-wrap {
+      width: min(1120px, calc(100% - 48px)); margin: auto;
+      min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    }
+    .brand { font-family: Georgia, serif; font-size: 21px; font-weight: 700; letter-spacing: -.04em; }
+    .brand span { color: var(--gold); }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a { font-size: 13px; color: #53645a; font-weight: 700; }
+    .nav-links a:hover, .nav-links a:focus { color: var(--gold); }
+    .menu-toggle {
+      display: none; border: 1px solid var(--line); background: var(--paper);
+      color: var(--green); border-radius: 8px; padding: 8px 12px; cursor: pointer;
+    }
+    main { overflow: hidden; }
+    .container { width: min(1120px, calc(100% - 48px)); margin: auto; }
+    .hero { padding: 92px 0 88px; }
+    .hero-grid { display: grid; grid-template-columns: 1.25fr .75fr; gap: 64px; align-items: center; }
+    .eyebrow { color: var(--gold); font-size: 11px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; }
+    h1 { margin: 18px 0 18px; font-size: clamp(42px, 6vw, 72px); line-height: 1.12; letter-spacing: -.065em; }
+    h1 em { font-family: Georgia, serif; font-weight: 400; }
+    .hero-copy { max-width: 600px; color: #59675f; font-size: 16px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      border: 1px solid var(--green); border-radius: 3px; padding: 12px 19px;
+      font-size: 13px; font-weight: 800; cursor: pointer;
+    }
+    .btn-primary { background: var(--green); color: var(--paper); }
+    .btn-secondary { background: transparent; color: var(--green); }
+    .hero-card {
+      background: var(--green); color: var(--paper); padding: 34px;
+      min-height: 310px; display: flex; flex-direction: column; justify-content: space-between;
+      box-shadow: var(--shadow);
+    }
+    .hero-card .monogram { font-family: Georgia, serif; font-size: 82px; line-height: 1; color: #d9c69e; }
+    .hero-card p { color: #d8e0d8; font-size: 13px; margin: 0; }
+    .hero-card strong { display: block; font-size: 19px; margin-top: 7px; }
+    .section { padding: 82px 0; border-top: 1px solid var(--line); }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 38px; }
+    .section-kicker { color: var(--gold); font-size: 11px; font-weight: 800; letter-spacing: .18em; }
+    h2 { margin: 7px 0 0; font-size: clamp(28px, 4vw, 42px); letter-spacing: -.05em; line-height: 1.2; }
+    .section-note { max-width: 390px; color: var(--muted); font-size: 13px; }
+    .about-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 56px; }
+    .about-lead { font-family: Georgia, serif; font-size: 28px; line-height: 1.35; }
+    .about-text { color: #5f6b63; font-size: 14px; }
+    .about-text p { margin: 0 0 14px; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+    .tag { border: 1px solid #cbd2c8; padding: 6px 10px; color: var(--green-2); font-size: 11px; font-weight: 700; }
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .skill-card { background: var(--paper); border: 1px solid var(--line); padding: 25px; }
+    .skill-number { color: var(--gold); font-family: Georgia, serif; font-size: 24px; }
+    .skill-card h3 { font-size: 17px; margin: 12px 0 8px; }
+    .skill-card p { color: var(--muted); font-size: 13px; margin: 0; }
+    .skill-card ul { padding-left: 17px; margin: 14px 0 0; color: #526158; font-size: 12px; }
+    .activity-list { border-top: 1px solid var(--line); }
+    .activity {
+      display: grid; grid-template-columns: 150px 1fr auto; gap: 24px; align-items: center;
+      padding: 23px 0; border-bottom: 1px solid var(--line);
+    }
+    .activity-date { color: var(--gold); font-family: Georgia, serif; font-size: 15px; }
+    .activity h3 { margin: 0 0 4px; font-size: 16px; }
+    .activity p { margin: 0; color: var(--muted); font-size: 12px; }
+    .detail-btn { background: none; border: 1px solid #bfc9bf; color: var(--green); padding: 8px 12px; font-size: 11px; font-weight: 800; cursor: pointer; }
+    .detail-btn:hover, .detail-btn:focus { background: var(--green); color: white; border-color: var(--green); }
+    .credentials { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 30px; }
+    .credential { background: var(--green); color: var(--paper); padding: 22px 25px; }
+    .credential span { color: #d9c69e; font-size: 11px; font-weight: 800; letter-spacing: .12em; }
+    .credential h3 { margin: 8px 0 2px; font-size: 17px; }
+    .credential p { margin: 0; color: #d5dfd7; font-size: 12px; }
+    .contact-panel { background: var(--green); color: var(--paper); padding: 48px; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 30px; }
+    .contact-panel h2 { color: var(--paper); }
+    .contact-panel p { color: #d5dfd7; font-size: 13px; max-width: 520px; }
+    .contact-link { color: #e4cf9e; font-family: Georgia, serif; font-size: clamp(18px, 2.5vw, 25px); border-bottom: 1px solid #8d9c8f; padding-bottom: 5px; }
+    footer { padding: 25px 0 35px; color: #778179; font-size: 11px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; }
+    .fiction-note { color: #8c6d38; font-weight: 800; }
+    .modal-backdrop {
+      display: none; position: fixed; inset: 0; z-index: 50; background: rgba(10, 25, 20, .62);
+      padding: 20px; align-items: center; justify-content: center;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal {
+      width: min(540px, 100%); background: var(--paper); padding: 32px; position: relative;
+      border-top: 5px solid var(--gold); max-height: 85vh; overflow-y: auto;
+    }
+    .modal h3 { margin: 8px 35px 12px 0; font-size: 23px; }
+    .modal p, .modal li { color: #59675f; font-size: 13px; }
+    .modal-close { position: absolute; top: 14px; right: 16px; border: 0; background: none; font-size: 25px; color: var(--green); cursor: pointer; }
+    .modal ul { padding-left: 18px; }
+    @media (max-width: 760px) {
+      .nav-wrap, .container { width: min(100% - 36px, 560px); }
+      .nav-wrap { min-height: 66px; }
+      .menu-toggle { display: inline-block; }
+      .nav-links {
+        display: none; position: absolute; top: 66px; left: 0; right: 0;
+        background: var(--cream); border-bottom: 1px solid var(--line);
+        padding: 18px 24px 22px; flex-direction: column; align-items: flex-start; gap: 15px;
+      }
+      .nav-links.open { display: flex; }
+      .hero { padding: 64px 0 58px; }
+      .hero-grid, .about-grid { grid-template-columns: 1fr; gap: 32px; }
+      .hero-card { min-height: 230px; padding: 25px; }
+      .hero-card .monogram { font-size: 64px; }
+      .section { padding: 60px 0; }
+      .section-head { display: block; margin-bottom: 28px; }
+      .section-note { margin-top: 13px; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .activity { grid-template-columns: 1fr auto; gap: 8px 14px; }
+      .activity-date { grid-column: 1 / -1; }
+      .activity > div:nth-child(2) { min-width: 0; }
+      .credentials { grid-template-columns: 1fr; }
+      .contact-panel { grid-template-columns: 1fr; padding: 30px 24px; }
+      .footer-inner { display: block; }
+      .footer-inner span { display: block; margin-top: 6px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="#home" aria-label="박수호 포트폴리오 홈">SUHO<span>.</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks">메뉴</button>
+      <nav class="nav-links" id="navLinks" aria-label="주요 메뉴">
+        <a href="#about">소개</a>
+        <a href="#skills">역량</a>
+        <a href="#activities">활동 기록</a>
+        <a href="#contact">연락처</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Accounting · Assurance · Portfolio</div>
+          <h1>숫자 너머의<br><em>가치를 읽는</em> 사람,<br>박수호입니다.</h1>
+          <p class="hero-copy">정확한 회계 지식과 꼼꼼한 검토 습관을 바탕으로 신뢰할 수 있는 결과를 만드는 회계 전문가를 꿈꿉니다. 배움을 실행으로 연결하며 꾸준히 성장하고 있습니다.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#activities">이력 살펴보기 <span aria-hidden="true">↗</span></a>
+            <a class="btn btn-secondary" href="#contact">연락하기</a>
+          </div>
+        </div>
+        <aside class="hero-card" aria-label="프로필 요약">
+          <div class="monogram">PS.</div>
+          <div>
+            <p>CA THOLIC UNIVERSITY · ACCOUNTING</p>
+            <strong>박수호 | 지원 분야: 회계감사</strong>
+            <p>삼일회계법인 지원 포트폴리오</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="section-kicker">01 / ABOUT</div><h2>소개</h2></div>
+          <p class="section-note">기본에 충실한 태도와 책임감 있는 업무 수행을 중요하게 생각합니다.</p>
+        </div>
+        <div class="about-grid">
+          <div class="about-lead">“신뢰는 작은 숫자 하나를 정확히 확인하는 태도에서 시작됩니다.”</div>
+          <div class="about-text">
+            <p>안녕하세요. 가톨릭대학교 회계학과에서 회계의 원리와 실무 역량을 쌓고 있는 박수호입니다.</p>
+            <p>전공 학습 과정에서 재무정보의 정확성과 투명성이 기업과 이해관계자의 의사결정에 미치는 영향을 배웠습니다. 학업에 꾸준히 집중해 학과 차석의 성과를 거두었으며, 전산세무와 컴퓨터 활용 관련 자격을 취득하며 실무 기초를 다졌습니다.</p>
+            <p>삼일회계법인에서 다양한 산업과 기업을 이해하고, 팀과 적극적으로 소통하며 전문성을 키우는 구성원으로 성장하고 싶습니다.</p>
+            <div class="tag-row"><span class="tag">꼼꼼한 검토</span><span class="tag">책임감</span><span class="tag">협업과 소통</span><span class="tag">지속적인 학습</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="section-kicker">02 / CAPABILITIES</div><h2>핵심 역량</h2></div>
+          <p class="section-note">전공 지식, 데이터 활용 능력, 그리고 업무를 대하는 태도를 균형 있게 발전시키고 있습니다.</p>
+        </div>
+        <div class="skills-grid">
+          <article class="skill-card">
+            <div class="skill-number">01</div><h3>회계·세무 기초</h3>
+            <p>회계정보의 흐름을 이해하고 거래의 경제적 실질을 파악하는 기초 역량</p>
+            <ul><li>재무회계 및 원가회계 이해</li><li>전산세무 2급 기반 세무 실무 지식</li><li>계정과목 및 재무제표 구조 이해</li></ul>
+          </article>
+          <article class="skill-card">
+            <div class="skill-number">02</div><h3>데이터·문서 활용</h3>
+            <p>정확한 자료 정리와 효율적인 문서 작업을 위한 도구 활용 능력</p>
+            <ul><li>컴퓨터활용능력 1급</li><li>스프레드시트 함수 및 데이터 관리</li><li>문서 작성과 자료 구조화</li></ul>
+          </article>
+          <article class="skill-card">
+            <div class="skill-number">03</div><h3>업무 태도</h3>
+            <p>기한과 기준을 준수하고 동료와 함께 결과의 완성도를 높이는 자세</p>
+            <ul><li>세부 사항을 확인하는 꼼꼼함</li><li>학습 목표를 꾸준히 달성하는 자기관리</li><li>피드백을 수용하는 성장 지향성</li></ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="activities">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="section-kicker">03 / EXPERIENCE</div><h2>활동 기록</h2></div>
+          <p class="section-note">학업 성취와 자격 취득을 통해 회계 직무에 필요한 기본기를 준비했습니다. 각 항목의 상세 내용을 확인할 수 있습니다.</p>
+        </div>
+        <div class="activity-list">
+          <article class="activity">
+            <div class="activity-date">ACADEMIC</div>
+            <div><h3>가톨릭대학교 회계학과 · 학과 차석</h3><p>전공 과목을 중심으로 성실하게 학업을 수행하고 우수한 학업 성과 달성</p></div>
+            <button class="detail-btn" data-detail="academic">상세 보기 +</button>
+          </article>
+          <article class="activity">
+            <div class="activity-date">CERTIFICATE 01</div>
+            <div><h3>전산세무 2급</h3><p>회계 및 세무 처리의 기초 지식과 전산 프로그램 활용 역량 검증</p></div>
+            <button class="detail-btn" data-detail="tax">상세 보기 +</button>
+          </article>
+          <article class="activity">
+            <div class="activity-date">CERTIFICATE 02</div>
+            <div><h3>컴퓨터활용능력 1급</h3><p>스프레드시트 및 데이터베이스 활용 능력 확보</p></div>
+            <button class="detail-btn" data-detail="computer">상세 보기 +</button>
+          </article>
+        </div>
+        <div class="credentials">
+          <div class="credential"><span>ACADEMIC RECORD</span><h3>학과 차석</h3><p>가톨릭대학교 회계학과</p></div>
+          <div class="credential"><span>PROFESSIONAL CERTIFICATE</span><h3>전산세무 2급 · 컴활 1급</h3><p>회계·세무 및 OA 활용 역량</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="contact-panel">
+          <div><div class="section-kicker">04 / CONTACT</div><h2>함께 성장할 기회를<br>기다리고 있습니다.</h2><p>회계 직무와 관련한 이야기나 협업 제안은 아래 이메일로 연락 부탁드립니다. 보내주신 연락을 확인하고 성실히 회신하겠습니다.</p></div>
+          <a class="contact-link" href="mailto:suho@example.com">suho@example.com ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© 2026 SUHO PARK · ACCOUNTING PORTFOLIO</div>
+      <span class="fiction-note">본 페이지의 인물, 학력, 자격 및 모든 이력은 포트폴리오 예시를 위한 가상 설정입니다.</span>
+    </div>
+  </footer>
+
+  <div class="modal-backdrop" id="detailModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <button class="modal-close" id="modalClose" aria-label="닫기">×</button>
+      <div class="section-kicker">PORTFOLIO DETAIL</div>
+      <h3 id="modalTitle"></h3>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    const detailContent = {
+      academic: {
+        title: '가톨릭대학교 회계학과 · 학과 차석',
+        body: '<p>전공 학습에 꾸준히 집중하여 학과 차석의 학업 성과를 달성한 것으로 설정된 가상 이력입니다.</p><ul><li>회계 원리와 재무제표의 구조 및 작성 과정 학습</li><li>재무회계·원가회계 등 전공 과목 중심의 학습</li><li>학습 계획을 세우고 복습하는 자기주도적 학업 관리</li></ul>'
+      },
+      tax: {
+        title: '전산세무 2급',
+        body: '<p>회계 및 세무 관련 기초 지식과 전산 처리 역량을 갖춘 것으로 설정된 가상 자격 이력입니다.</p><ul><li>부가가치세 및 소득세 관련 기초 이해</li><li>회계 자료 입력과 결산 흐름에 대한 이해</li><li>세무 업무의 정확성과 증빙 관리의 중요성 인식</li></ul>'
+      },
+      computer: {
+        title: '컴퓨터활용능력 1급',
+        body: '<p>스프레드시트와 데이터베이스를 활용한 자료 처리 역량을 갖춘 것으로 설정된 가상 자격 이력입니다.</p><ul><li>스프레드시트 함수 및 데이터 분석 기능 활용</li><li>데이터베이스 기본 구조와 질의 처리 이해</li><li>문서와 데이터를 체계적으로 정리하는 능력</li></ul>'
+      }
+    };
+
+    const modal = document.getElementById('detailModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalBody = document.getElementById('modalBody');
+    const modalClose = document.getElementById('modalClose');
+
+    function closeModal() {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('[data-detail]').forEach(button => {
+      button.addEventListener('click', () => {
+        const item = detailContent[button.dataset.detail];
+        if (!item) return;
+        modalTitle.textContent = item.title;
+        modalBody.innerHTML = item.body;
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        modalClose.focus();
+      });
+    });
+
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', event => {
+      if (event.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && modal.classList.contains('open')) closeModal();
+    });
+  </script>
+</body>
+</html>
